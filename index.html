@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijay K — Customer Success Manager | Smartlead</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            background: #0a0a1a;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60A5FA, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #60A5FA, #A78BFA);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            width: 26px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Rainbow accent bar under nav */
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #60A5FA, #A78BFA, #F472B6, #34D399, #FBBF24, #60A5FA);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        nav.scrolled::after {
+            opacity: 1;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+        }
+
+        /* Animated gradient blobs */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: blobFloat 10s ease-in-out infinite;
+        }
+
+        .hero-blob-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(96, 165, 250, 0.25);
+            top: -10%;
+            right: -5%;
+        }
+
+        .hero-blob-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(167, 139, 250, 0.2);
+            bottom: -10%;
+            left: -5%;
+            animation-delay: 3s;
+        }
+
+        .hero-blob-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(244, 114, 182, 0.15);
+            top: 40%;
+            left: 30%;
+            animation-delay: 6s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Subtle grid pattern */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            padding: 120px 0 80px;
+        }
+
+        .hero-photo-container {
+            flex-shrink: 0;
+        }
+
+        .hero-photo-ring {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+
+        .hero-photo-ring::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #60A5FA, #A78BFA, #F472B6, #34D399, #FBBF24, #60A5FA);
+            animation: spinRing 6s linear infinite;
+        }
+
+        @keyframes spinRing {
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-photo-ring::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            background: #0a0a1a;
+        }
+
+        .hero-photo {
+            position: relative;
+            z-index: 1;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid #0a0a1a;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-greeting {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #FBBF24;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-name {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero-name span {
+            background: linear-gradient(135deg, #60A5FA, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-role {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .hero-role strong {
+            color: #60A5FA;
+        }
+
+        .hero-location {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #60A5FA, #3B82F6);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(96, 165, 250, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(96, 165, 250, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 30px;
+        }
+
+        .btn-outline:hover {
+            border-color: #60A5FA;
+            color: #60A5FA;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(96, 165, 250, 0.2);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #0a0a1a 0%, #12122a 50%, #0a0a1a 100%);
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #60A5FA;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, #60A5FA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 48px;
+            align-items: start;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 24px;
+        }
+
+        .highlight-card:nth-child(1) .highlight-icon { background: linear-gradient(135deg, #60A5FA, #3B82F6); }
+        .highlight-card:nth-child(2) .highlight-icon { background: linear-gradient(135deg, #A78BFA, #7C3AED); }
+        .highlight-card:nth-child(3) .highlight-icon { background: linear-gradient(135deg, #FBBF24, #F59E0B); }
+        .highlight-card:nth-child(4) .highlight-icon { background: linear-gradient(135deg, #F472B6, #EC4899); }
+
+        .highlight-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .highlight-card p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #0a0a1a 0%, #0d1b2a 50%, #0a0a1a 100%);
+            position: relative;
+        }
+
+        .skills::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 20px 20px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .skill-card:nth-child(1)::before { background: linear-gradient(90deg, #60A5FA, #3B82F6); }
+        .skill-card:nth-child(2)::before { background: linear-gradient(90deg, #A78BFA, #7C3AED); }
+        .skill-card:nth-child(3)::before { background: linear-gradient(90deg, #FBBF24, #F59E0B); }
+        .skill-card:nth-child(4)::before { background: linear-gradient(90deg, #F472B6, #EC4899); }
+        .skill-card:nth-child(5)::before { background: linear-gradient(90deg, #34D399, #10B981); }
+        .skill-card:nth-child(6)::before { background: linear-gradient(90deg, #FB923C, #F97316); }
+
+        .skill-emoji {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .skill-card:nth-child(1) h3 { color: #60A5FA; }
+        .skill-card:nth-child(2) h3 { color: #A78BFA; }
+        .skill-card:nth-child(3) h3 { color: #FBBF24; }
+        .skill-card:nth-child(4) h3 { color: #F472B6; }
+        .skill-card:nth-child(5) h3 { color: #34D399; }
+        .skill-card:nth-child(6) h3 { color: #FB923C; }
+
+        .skill-card p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.6;
+        }
+
+        .skill-bar-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 3px;
+            margin-top: 16px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        .skill-card:nth-child(1) .skill-bar-fill { background: linear-gradient(90deg, #60A5FA, #3B82F6); }
+        .skill-card:nth-child(2) .skill-bar-fill { background: linear-gradient(90deg, #A78BFA, #7C3AED); }
+        .skill-card:nth-child(3) .skill-bar-fill { background: linear-gradient(90deg, #FBBF24, #F59E0B); }
+        .skill-card:nth-child(4) .skill-bar-fill { background: linear-gradient(90deg, #F472B6, #EC4899); }
+        .skill-card:nth-child(5) .skill-bar-fill { background: linear-gradient(90deg, #34D399, #10B981); }
+        .skill-card:nth-child(6) .skill-bar-fill { background: linear-gradient(90deg, #FB923C, #F97316); }
+
+        /* ===== EXPERIENCE ===== */
+        .experience {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #0a0a1a 0%, #12122a 50%, #0a0a1a 100%);
+        }
+
+        .timeline {
+            margin-top: 48px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #60A5FA, #A78BFA, #F472B6, #34D399, #FBBF24);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+            padding: 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 36px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid;
+            background: #0a0a1a;
+        }
+
+        .timeline-item:nth-child(1)::before { border-color: #60A5FA; }
+        .timeline-item:nth-child(2)::before { border-color: #A78BFA; }
+        .timeline-item:nth-child(3)::before { border-color: #34D399; }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item:nth-child(1) .timeline-date { color: #60A5FA; }
+        .timeline-item:nth-child(2) .timeline-date { color: #A78BFA; }
+        .timeline-item:nth-child(3) .timeline-date { color: #34D399; }
+
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+        }
+
+        .timeline-item p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, #0a0a1a 0%, #1a0a2e 50%, #0a0a1a 100%);
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .contact-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-linkedin {
+            background: linear-gradient(135deg, #0077b5, #00a0dc);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 119, 181, 0.4);
+        }
+
+        .btn-linkedin:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 119, 181, 0.5);
+        }
+
+        .btn-calendar {
+            background: linear-gradient(135deg, #60A5FA, #3B82F6);
+            color: white;
+            box-shadow: 0 4px 20px rgba(96, 165, 250, 0.4);
+        }
+
+        .btn-calendar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(96, 165, 250, 0.5);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            background: #060612;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-rainbow {
+            height: 3px;
+            background: linear-gradient(90deg, #60A5FA, #A78BFA, #F472B6, #34D399, #FBBF24, #FB923C);
+            margin-bottom: 30px;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #60A5FA;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+                padding: 140px 0 80px;
+            }
+
+            .hero-photo-ring {
+                width: 240px;
+                height: 240px;
+            }
+
+            .hero-photo {
+                width: 240px;
+                height: 240px;
+            }
+
+            .hero-name {
+                font-size: 2.8rem;
+            }
+
+            .hero-location {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(10, 10, 26, 0.98);
+                padding: 20px 24px;
+                gap: 16px;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-name {
+                font-size: 2.2rem;
+            }
+
+            .hero-role {
+                font-size: 1.1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav id="navbar">
+        <div class="container">
+            <a href="#hero" class="nav-logo">VK.</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="hero-blob hero-blob-3"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-photo-container reveal-left">
+                    <div class="hero-photo-ring">
+                        <img class="hero-photo" src="photo.jpg" alt="Vijay K" />
+                    </div>
+                </div>
+                <div class="hero-text reveal-right">
+                    <p class="hero-greeting">Hello, I'm</p>
+                    <h1 class="hero-name">Vijay <span>K</span></h1>
+                    <p class="hero-role">Customer Success Manager at <a href="http://smartlead.ai/" target="_blank" rel="noopener"><strong>Smartlead</strong></a></p>
+                    <p class="hero-location">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+                        Chennai, Tamil Nadu, India
+                    </p>
+                    <div class="hero-buttons">
+                        <a class="btn btn-primary" href="https://cal.com/vijay-k-nve0xr/meeting-with-vijay" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+                            Book a Meeting
+                        </a>
+                        <a class="btn btn-outline" href="https://www.linkedin.com/in/vijaykz/" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll Down</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="reveal">
+                <p class="section-label">About Me</p>
+                <h2 class="section-title">Driving Customer <span>Success</span> Every Day</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal-left">
+                    <p>
+                        I'm a Customer Success Manager at <a href="http://smartlead.ai/" target="_blank" rel="noopener"><strong style="color:#60A5FA;">Smartlead</strong></a>,
+                        where I help businesses unlock the full potential of their outbound sales campaigns.
+                        I thrive on building meaningful relationships with clients and ensuring they achieve
+                        their goals through our platform.
+                    </p>
+                    <p>
+                        With a deep understanding of SaaS, sales automation, and outbound strategy,
+                        I bridge the gap between product capabilities and customer needs. I'm passionate about
+                        turning challenges into opportunities and creating exceptional client experiences.
+                    </p>
+                    <p>
+                        Based in <strong style="color:#FBBF24;">Chennai, India</strong>, I bring energy, empathy,
+                        and a problem-solving mindset to everything I do. Whether it's onboarding a new customer
+                        or troubleshooting a complex campaign, I'm always ready to go the extra mile.
+                    </p>
+                </div>
+                <div class="about-highlights reveal-right">
+                    <div class="highlight-card">
+                        <div class="highlight-icon">&#127919;</div>
+                        <h4>Customer-First</h4>
+                        <p>Dedicated to ensuring every client achieves their goals</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">&#128640;</div>
+                        <h4>SaaS Expert</h4>
+                        <p>Deep understanding of SaaS platforms and growth</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">&#129309;</div>
+                        <h4>Relationship Builder</h4>
+                        <p>Strong client relationships through trust and empathy</p>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-icon">&#128161;</div>
+                        <h4>Problem Solver</h4>
+                        <p>Certified in troubleshooting and problem resolution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="reveal" style="text-align: center;">
+                <p class="section-label">What I Do</p>
+                <h2 class="section-title">My <span>Expertise</span></h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">&#128170;</span>
+                    <h3>Customer Success</h3>
+                    <p>Onboarding, retention, and expansion strategies that keep customers happy and growing</p>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95%"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">&#9889;</span>
+                    <h3>Sales Automation</h3>
+                    <p>Expert in cold email platforms, sequencing, and multi-channel outbound automation</p>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90%"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">&#128200;</span>
+                    <h3>Outbound Strategy</h3>
+                    <p>Crafting high-converting outbound campaigns with smart targeting and messaging</p>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88%"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">&#128483;&#65039;</span>
+                    <h3>Client Communication</h3>
+                    <p>Clear, empathetic communication that builds trust and drives alignment</p>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92%"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">&#128736;&#65039;</span>
+                    <h3>Troubleshooting</h3>
+                    <p>Certified problem-solver for technical and process-related customer challenges</p>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85%"></div></div>
+                </div>
+                <div class="skill-card reveal">
+                    <span class="skill-emoji">&#129302;</span>
+                    <h3>AI & MarTech</h3>
+                    <p>Staying ahead of trends in AI agents, smart automation, and marketing technology</p>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80%"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="reveal" style="text-align: center;">
+                <p class="section-label">My Journey</p>
+                <h2 class="section-title">Experience & <span>Certifications</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal-left">
+                    <p class="timeline-date">Current Role</p>
+                    <h3>Customer Success Manager</h3>
+                    <p class="timeline-company"><a href="http://smartlead.ai/" target="_blank" rel="noopener">Smartlead</a> &middot; Chennai, India</p>
+                    <p>
+                        Leading customer success initiatives for <a href="http://smartlead.ai/" target="_blank" rel="noopener" style="color:#60A5FA;">Smartlead's</a> growing client base.
+                        Helping businesses optimise their cold email outreach, improve deliverability,
+                        and achieve their outbound sales goals through strategic guidance and hands-on support.
+                    </p>
+                </div>
+                <div class="timeline-item reveal-left">
+                    <p class="timeline-date">Certification &middot; Feb 2023</p>
+                    <h3>Customer Service: Problem-Solving & Troubleshooting</h3>
+                    <p class="timeline-company">LinkedIn Learning</p>
+                    <p>
+                        Completed professional certification in advanced customer service techniques,
+                        focusing on structured problem-solving frameworks and effective troubleshooting
+                        methodologies for complex customer issues.
+                    </p>
+                </div>
+                <div class="timeline-item reveal-left">
+                    <p class="timeline-date">Certification</p>
+                    <h3>Outbound Certified</h3>
+                    <p class="timeline-company">Clay</p>
+                    <p>
+                        Certified in modern outbound sales methodology, covering data enrichment,
+                        personalized outreach at scale, and building high-converting prospecting workflows
+                        using Clay's platform.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="reveal">
+                <p class="section-label">Get In Touch</p>
+                <h2 class="section-title">Let's <span>Connect</span></h2>
+                <p class="contact-subtitle">
+                    Whether you want to discuss customer success strategies, explore <a href="http://smartlead.ai/" target="_blank" rel="noopener" style="color:#60A5FA;">Smartlead</a>,
+                    or just say hello — I'd love to hear from you!
+                </p>
+            </div>
+            <div class="contact-buttons reveal">
+                <a class="btn btn-linkedin" href="https://www.linkedin.com/in/vijaykz/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    Connect on LinkedIn
+                </a>
+                <a class="btn btn-calendar" href="https://cal.com/vijay-k-nve0xr/meeting-with-vijay" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+                    Book a Meeting
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-rainbow"></div>
+        <div class="container">
+            <p>&copy; 2026 Vijay K. All rights reserved. &middot; Made with passion in Chennai</p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Scroll reveal animations
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Animate skill bars when visible
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                        bar.style.width = bar.dataset.width;
+                    });
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Animate skill bars that are directly observed
+        document.querySelectorAll('.skill-card').forEach(card => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target.querySelector('.skill-bar-fill');
+                        if (bar) bar.style.width = bar.dataset.width;
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
