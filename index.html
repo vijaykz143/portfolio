@@ -359,8 +359,27 @@
             position: relative; z-index: 4; display: flex; align-items: center;
             gap: 80px; padding: 120px 0 80px;
         }
-        .hero-photo-container { flex-shrink: 0; }
-        .hero-photo-ring { position: relative; width: 320px; height: 320px; }
+        .hero-photo-container {
+            flex-shrink: 0; perspective: 800px;
+        }
+        .hero-photo-wrapper {
+            transform-style: preserve-3d; transition: transform 0.15s ease-out;
+            animation: photoFloat 6s ease-in-out infinite;
+        }
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+            50% { transform: translateY(-14px) rotateX(2deg) rotateY(-2deg); }
+        }
+        .hero-photo-wrapper:hover { animation-play-state: paused; }
+        .hero-photo-ring {
+            position: relative; width: 320px; height: 320px;
+            filter: drop-shadow(0 0 30px rgba(99,102,241,0.3)) drop-shadow(0 0 60px rgba(168,85,247,0.15));
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 30px rgba(99,102,241,0.3)) drop-shadow(0 0 60px rgba(168,85,247,0.15)); }
+            50% { filter: drop-shadow(0 0 45px rgba(99,102,241,0.5)) drop-shadow(0 0 80px rgba(168,85,247,0.25)); }
+        }
         .hero-photo-ring::before {
             content: ''; position: absolute; inset: -6px; border-radius: 50%;
             background: conic-gradient(from 0deg, var(--blue), var(--purple), var(--pink), var(--green), var(--gold), var(--blue));
@@ -374,7 +393,32 @@
         .hero-photo {
             position: relative; z-index: 1; width: 320px; height: 320px;
             border-radius: 50%; object-fit: cover; border: 6px solid var(--bg-primary);
-            transition: border-color 0.5s ease;
+            transition: border-color 0.5s ease, transform 0.3s ease;
+            transform: translateZ(30px);
+        }
+        .hero-photo-shine {
+            position: absolute; inset: 4px; z-index: 2; border-radius: 50%; overflow: hidden; pointer-events: none;
+        }
+        .hero-photo-shine::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.12) 55%, transparent 60%);
+            transform: translateX(-100%) rotate(0deg); transition: none;
+        }
+        .hero-photo-wrapper:hover .hero-photo-shine::before {
+            animation: shineSweep 0.8s ease-out forwards;
+        }
+        @keyframes shineSweep {
+            to { transform: translateX(100%) rotate(0deg); }
+        }
+        .hero-photo-shadow {
+            position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%) translateZ(-40px);
+            width: 70%; height: 30px; border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(99,102,241,0.3) 0%, transparent 70%);
+            animation: shadowFloat 6s ease-in-out infinite;
+        }
+        @keyframes shadowFloat {
+            0%, 100% { opacity: 0.8; transform: translateX(-50%) translateZ(-40px) scale(1); }
+            50% { opacity: 0.4; transform: translateX(-50%) translateZ(-40px) scale(0.85); }
         }
         .hero-text { flex: 1; min-height: 220px; }
         .hero-greeting {
@@ -830,8 +874,12 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-photo-container">
-                    <div class="hero-photo-ring">
-                        <img class="hero-photo" src="photo.jpg" alt="Vijay K" />
+                    <div class="hero-photo-wrapper" id="heroPhotoWrapper">
+                        <div class="hero-photo-ring">
+                            <img class="hero-photo" src="photo.jpg" alt="Vijay K" />
+                            <div class="hero-photo-shine"></div>
+                        </div>
+                        <div class="hero-photo-shadow"></div>
                     </div>
                 </div>
                 <div class="hero-text">
@@ -1433,6 +1481,29 @@
                     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
                 });
             });
+        }
+
+        // ============ 3D TILT ON HERO PHOTO ============
+        if (!isTouchDevice) {
+            var photoWrapper = document.getElementById('heroPhotoWrapper');
+            if (photoWrapper) {
+                var photoContainer = photoWrapper.parentElement;
+                photoContainer.addEventListener('mousemove', function(e) {
+                    var rect = photoContainer.getBoundingClientRect();
+                    var x = e.clientX - rect.left;
+                    var y = e.clientY - rect.top;
+                    var centerX = rect.width / 2;
+                    var centerY = rect.height / 2;
+                    var rotateX = (y - centerY) / centerY * -12;
+                    var rotateY = (x - centerX) / centerX * 12;
+                    photoWrapper.style.animation = 'none';
+                    photoWrapper.style.transform = 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.05)';
+                });
+                photoContainer.addEventListener('mouseleave', function() {
+                    photoWrapper.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+                    setTimeout(function() { photoWrapper.style.animation = ''; }, 300);
+                });
+            }
         }
 
         // ============ TEXT SCRAMBLE EFFECT ============
