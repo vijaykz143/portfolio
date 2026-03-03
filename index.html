@@ -8,21 +8,21 @@
     <style>
         /* ===== CSS VARIABLES (Theme System) ===== */
         :root {
-            --bg-primary: #0a0a1a;
-            --bg-secondary: #12122a;
-            --bg-tertiary: #0f1525;
-            --bg-card: rgba(255,255,255,0.03);
-            --bg-card-hover: rgba(255,255,255,0.06);
-            --border-card: rgba(255,255,255,0.08);
-            --border-card-hover: rgba(255,255,255,0.15);
+            --bg-primary: #050510;
+            --bg-secondary: #0a0a20;
+            --bg-tertiary: #080815;
+            --bg-card: rgba(255,255,255,0.025);
+            --bg-card-hover: rgba(255,255,255,0.05);
+            --border-card: rgba(255,255,255,0.06);
+            --border-card-hover: rgba(255,255,255,0.12);
             --text-primary: #fff;
             --text-secondary: rgba(255,255,255,0.8);
             --text-muted: rgba(255,255,255,0.7);
             --text-faint: rgba(255,255,255,0.5);
             --text-fainter: rgba(255,255,255,0.45);
             --text-faintest: rgba(255,255,255,0.35);
-            --nav-bg: rgba(10,10,26,0.95);
-            --nav-border: rgba(255,255,255,0.05);
+            --nav-bg: rgba(5,5,16,0.95);
+            --nav-border: rgba(255,255,255,0.04);
             --blue: #60A5FA;
             --blue-dark: #3B82F6;
             --purple: #A78BFA;
@@ -45,8 +45,8 @@
             --grain-opacity: 0.035;
             --particle-opacity: 0.6;
             --glow-opacity: 0.07;
-            --footer-bg: #060612;
-            --loader-bg: #0a0a1a;
+            --footer-bg: #030308;
+            --loader-bg: #050510;
             --grid-line: rgba(255,255,255,0.02);
         }
 
@@ -182,7 +182,6 @@
         .shape-circle { border-radius: 50%; }
         .shape-ring { border-radius: 50%; background: transparent !important; }
         .shape-triangle { width: 0 !important; height: 0 !important; background: transparent !important; }
-        .shape-square { border-radius: 4px; }
         @keyframes floatA { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
         @keyframes floatB { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(25px) rotate(-10deg); } }
         @keyframes floatC { 0%, 100% { transform: translateX(0) rotate(0deg); } 50% { transform: translateX(20px) rotate(20deg); } }
@@ -334,7 +333,7 @@
         .hero {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0c0c24 50%, var(--bg-primary) 100%);
             background-size: 400% 400%; animation: meshShift 25s ease infinite;
         }
         #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
@@ -519,7 +518,7 @@
         /* ===== SKILLS ===== */
         .skills {
             padding: 120px 0; position: relative;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #0d1b2a 30%, var(--bg-primary) 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #08101a 30%, var(--bg-primary) 100%);
             background-size: 300% 300%; animation: meshShift 22s ease infinite;
         }
         .light-theme .skills {
@@ -625,60 +624,57 @@
         .timeline-company { font-size: 1rem; color: var(--text-faint); margin-bottom: 12px; }
         .timeline-item > p:last-child { font-size: 0.9rem; color: var(--text-faint); line-height: 1.7; }
 
-        /* ===== PHILOSOPHY / TESTIMONIAL ===== */
-        .philosophy {
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
             padding: 120px 0; position: relative;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a0a2e 50%, var(--bg-primary) 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0e061e 50%, var(--bg-primary) 100%);
             background-size: 300% 300%; animation: meshShift 24s ease infinite;
         }
-        .light-theme .philosophy {
+        .light-theme .testimonials {
             background: linear-gradient(135deg, var(--bg-primary) 0%, #e8e0f0 50%, var(--bg-primary) 100%);
             background-size: 300% 300%;
         }
-        .philosophy-carousel { position: relative; max-width: 800px; margin: 48px auto 0; min-height: 260px; z-index: 4; }
-        .philosophy-card {
-            position: absolute; inset: 0; padding: 48px 40px;
+        .testimonials-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+            margin-top: 48px; position: relative; z-index: 4;
+        }
+        .testimonial-card {
             background: var(--bg-card); border: 1px solid var(--border-card);
-            border-radius: 24px; backdrop-filter: blur(16px);
-            text-align: center; opacity: 0; transform: translateX(40px) scale(0.95);
-            transition: opacity 0.6s ease, transform 0.6s ease; overflow: hidden;
+            border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px);
+            transition: all 0.4s ease; position: relative;
         }
-        .philosophy-card.active {
-            opacity: 1; transform: translateX(0) scale(1); position: relative;
-        }
-        .philosophy-card::after {
-            content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
+        .testimonial-card::after {
+            content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
             background: linear-gradient(135deg, transparent, var(--purple), transparent);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.5;
+            -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.4s;
         }
-        .philosophy-quote-mark {
-            font-size: 4rem; line-height: 1; margin-bottom: 8px;
-            background: linear-gradient(135deg, var(--blue), var(--purple));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            font-family: Georgia, serif;
+        .testimonial-card:hover::after { opacity: 0.6; }
+        .testimonial-card:hover {
+            transform: translateY(-5px); border-color: var(--border-card-hover);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
-        .philosophy-text {
-            font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary);
-            font-style: italic; margin-bottom: 20px;
+        .testimonial-card img {
+            width: 100%; height: auto; display: block;
+            border-radius: 20px;
         }
-        .philosophy-author { font-size: 0.9rem; color: var(--blue); font-weight: 600; }
-        .philosophy-dots {
-            display: flex; justify-content: center; gap: 10px; margin-top: 32px; position: relative; z-index: 4;
+        .testimonial-source {
+            padding: 16px 20px; display: flex; align-items: center; gap: 10px;
         }
-        .philosophy-dot {
-            width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--text-faintest);
-            background: transparent; cursor: none; transition: all 0.3s ease;
+        .testimonial-badge {
+            display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.5px; text-transform: uppercase;
         }
-        .philosophy-dot.active {
-            background: var(--blue); border-color: var(--blue);
-            box-shadow: 0 0 12px rgba(96,165,250,0.5);
-        }
+        .badge-linkedin { background: rgba(0,119,181,0.15); color: #0077b5; }
+        .badge-slack { background: rgba(96,165,250,0.15); color: var(--blue); }
+        .badge-nps { background: rgba(52,211,153,0.15); color: var(--green); }
+        .testimonial-name { font-size: 0.85rem; color: var(--text-faint); font-weight: 500; }
 
         /* ===== CONTACT ===== */
         .contact {
             padding: 120px 0; text-align: center; position: relative;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a0a2e 50%, var(--bg-primary) 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0e061e 50%, var(--bg-primary) 100%);
             background-size: 300% 300%; animation: meshShift 20s ease infinite;
         }
         .light-theme .contact {
@@ -734,8 +730,7 @@
             .skills-grid { grid-template-columns: 1fr 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .section-title { font-size: 2.2rem; }
-            .philosophy-card { padding: 36px 24px; }
-            .philosophy-text { font-size: 1.05rem; }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 600px) {
             .nav-links {
@@ -753,7 +748,7 @@
             .btn { width: 100%; justify-content: center; }
             .contact-buttons { flex-direction: column; align-items: center; }
             .stat-number { font-size: 2.2rem; }
-            .philosophy-card { padding: 28px 20px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
         }
         @media (hover: none) {
             body { cursor: auto; }
@@ -809,7 +804,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
@@ -829,7 +824,7 @@
             <div class="floating-shape shape-circle" style="width:40px;height:40px;background:var(--blue);top:15%;left:8%;animation:floatA 18s infinite;"></div>
             <div class="floating-shape shape-ring" style="width:50px;height:50px;border:3px solid var(--purple);top:70%;left:5%;animation:floatB 22s infinite;"></div>
             <div class="floating-shape shape-triangle" style="border-left:15px solid transparent;border-right:15px solid transparent;border-bottom:26px solid var(--pink);top:25%;right:12%;animation:floatC 20s infinite;"></div>
-            <div class="floating-shape shape-square" style="width:25px;height:25px;background:var(--gold);bottom:20%;right:8%;animation:floatD 16s infinite;"></div>
+            <div class="floating-shape shape-circle" style="width:18px;height:18px;background:var(--gold);bottom:20%;right:8%;animation:floatD 16s infinite;"></div>
         </div>
         <div class="container">
             <div class="hero-content">
@@ -904,7 +899,7 @@
     <section class="about" id="about">
         <div class="floating-shapes">
             <div class="floating-shape shape-triangle" style="border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:21px solid var(--blue);top:12%;right:15%;animation:floatD 19s infinite;"></div>
-            <div class="floating-shape shape-square" style="width:20px;height:20px;background:var(--purple);bottom:18%;left:10%;animation:floatC 23s infinite;"></div>
+            <div class="floating-shape shape-ring" style="width:28px;height:28px;border:2px solid var(--purple);bottom:18%;left:10%;animation:floatC 23s infinite;"></div>
             <div class="floating-shape shape-circle" style="width:35px;height:35px;background:var(--pink);top:60%;right:5%;animation:floatA 21s infinite;"></div>
         </div>
         <div class="container">
@@ -1006,7 +1001,7 @@
     <!-- Experience -->
     <section class="experience" id="experience">
         <div class="floating-shapes">
-            <div class="floating-shape shape-square" style="width:28px;height:28px;background:var(--blue);top:15%;right:6%;animation:floatC 19s infinite;"></div>
+            <div class="floating-shape shape-circle" style="width:22px;height:22px;background:var(--blue);top:15%;right:6%;animation:floatC 19s infinite;"></div>
             <div class="floating-shape shape-circle" style="width:18px;height:18px;background:var(--pink);bottom:20%;left:4%;animation:floatA 25s infinite;"></div>
         </div>
         <div class="container">
@@ -1040,8 +1035,8 @@
         </div>
     </section>
 
-    <!-- Philosophy -->
-    <section class="philosophy" id="philosophy">
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
         <div class="floating-shapes">
             <div class="floating-shape shape-ring" style="width:48px;height:48px;border:3px solid var(--purple);top:18%;left:10%;animation:floatD 21s infinite;"></div>
             <div class="floating-shape shape-triangle" style="border-left:14px solid transparent;border-right:14px solid transparent;border-bottom:24px solid var(--green);bottom:22%;right:8%;animation:floatB 19s infinite;"></div>
@@ -1049,30 +1044,38 @@
         </div>
         <div class="container">
             <div class="reveal" style="text-align: center; position:relative;z-index:4;">
-                <p class="section-label">What Drives Me</p>
-                <h2 class="section-title">My <span class="gradient-text-animated scramble-text" data-text="Philosophy">Philosophy</span></h2>
+                <p class="section-label">What Clients Say</p>
+                <h2 class="section-title">Client <span class="gradient-text-animated scramble-text" data-text="Testimonials">Testimonials</span></h2>
             </div>
-            <div class="philosophy-carousel" id="philosophyCarousel">
-                <div class="philosophy-card active" data-index="0">
-                    <div class="philosophy-quote-mark">&ldquo;</div>
-                    <p class="philosophy-text">Customer success isn't just about solving problems — it's about anticipating needs, building trust, and helping people achieve outcomes they didn't think were possible.</p>
-                    <p class="philosophy-author">On Customer Success</p>
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <div class="testimonial-card stagger-item">
+                    <img src="Testimonial.png" alt="Testimonial from Alessandro Martirengo" loading="lazy" />
+                    <div class="testimonial-source">
+                        <span class="testimonial-badge badge-linkedin">LinkedIn</span>
+                        <span class="testimonial-name">Alessandro Martirengo</span>
+                    </div>
                 </div>
-                <div class="philosophy-card" data-index="1">
-                    <div class="philosophy-quote-mark">&ldquo;</div>
-                    <p class="philosophy-text">The best partnerships are built on empathy. When you truly understand someone's challenges, the solutions become obvious and the relationship becomes unbreakable.</p>
-                    <p class="philosophy-author">On Relationships</p>
+                <div class="testimonial-card stagger-item">
+                    <img src="Testimonial3.png" alt="Testimonial from Daria Shamshurina" loading="lazy" />
+                    <div class="testimonial-source">
+                        <span class="testimonial-badge badge-linkedin">LinkedIn</span>
+                        <span class="testimonial-name">Daria Shamshurina</span>
+                    </div>
                 </div>
-                <div class="philosophy-card" data-index="2">
-                    <div class="philosophy-quote-mark">&ldquo;</div>
-                    <p class="philosophy-text">Every campaign optimized, every deliverability issue resolved, every client milestone celebrated — these small wins compound into extraordinary results over time.</p>
-                    <p class="philosophy-author">On Growth</p>
+                <div class="testimonial-card stagger-item">
+                    <img src="Testimonial2.png" alt="Testimonial from Frank at ROCI" loading="lazy" />
+                    <div class="testimonial-source">
+                        <span class="testimonial-badge badge-slack">Slack</span>
+                        <span class="testimonial-name">Frank — ROCI</span>
+                    </div>
                 </div>
-            </div>
-            <div class="philosophy-dots" id="philosophyDots">
-                <button class="philosophy-dot active" data-index="0" aria-label="Quote 1"></button>
-                <button class="philosophy-dot" data-index="1" aria-label="Quote 2"></button>
-                <button class="philosophy-dot" data-index="2" aria-label="Quote 3"></button>
+                <div class="testimonial-card stagger-item">
+                    <img src="Testimonial4.png" alt="NPS Score 10 from Atishay Jain" loading="lazy" />
+                    <div class="testimonial-source">
+                        <span class="testimonial-badge badge-nps">NPS 10</span>
+                        <span class="testimonial-name">Atishay Jain — Eagleinfoservices</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="wave-divider">
@@ -1084,7 +1087,7 @@
     <section class="contact" id="contact">
         <div class="floating-shapes">
             <div class="floating-shape shape-circle" style="width:32px;height:32px;background:var(--blue);top:20%;left:8%;animation:floatA 20s infinite;"></div>
-            <div class="floating-shape shape-square" style="width:22px;height:22px;background:var(--pink);bottom:25%;right:10%;animation:floatD 17s infinite;"></div>
+            <div class="floating-shape shape-ring" style="width:30px;height:30px;border:2px solid var(--pink);bottom:25%;right:10%;animation:floatD 17s infinite;"></div>
         </div>
         <div class="container">
             <div class="reveal" style="position:relative;z-index:4;">
@@ -1369,7 +1372,7 @@
         }, { threshold: 0.15 });
         revealElements.forEach(function(el) { revealObserver.observe(el); });
 
-        var staggerParents = document.querySelectorAll('#statsGrid, #aboutHighlights, #skillsGrid, #timeline');
+        var staggerParents = document.querySelectorAll('#statsGrid, #aboutHighlights, #skillsGrid, #timeline, #testimonialsGrid');
         var staggerObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
@@ -1484,36 +1487,6 @@
             });
         }
 
-        // ============ PHILOSOPHY CAROUSEL ============
-        var carouselCards = document.querySelectorAll('.philosophy-card');
-        var carouselDots = document.querySelectorAll('.philosophy-dot');
-        var currentSlide = 0;
-        var carouselInterval;
-
-        function showSlide(index) {
-            carouselCards.forEach(function(card) {
-                card.classList.remove('active');
-                card.style.transform = 'translateX(40px) scale(0.95)';
-            });
-            carouselDots.forEach(function(dot) { dot.classList.remove('active'); });
-            carouselCards[index].classList.add('active');
-            carouselDots[index].classList.add('active');
-            currentSlide = index;
-        }
-
-        function nextSlide() {
-            showSlide((currentSlide + 1) % carouselCards.length);
-        }
-
-        carouselDots.forEach(function(dot) {
-            dot.addEventListener('click', function() {
-                clearInterval(carouselInterval);
-                showSlide(parseInt(this.dataset.index));
-                carouselInterval = setInterval(nextSlide, 5000);
-            });
-        });
-
-        carouselInterval = setInterval(nextSlide, 5000);
 
     })();
     </script>
