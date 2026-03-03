@@ -99,57 +99,57 @@
         }
         .aurora-blob {
             position: absolute; border-radius: 50%;
-            filter: blur(100px); will-change: transform, opacity;
+            will-change: transform;
         }
         .aurora-blob-1 {
             width: 600px; height: 600px; top: -15%; left: -10%;
-            background: radial-gradient(circle, var(--blue), transparent 70%);
+            background: radial-gradient(circle, rgba(96,165,250,0.15), transparent 70%);
             animation: auroraMove1 20s ease-in-out infinite;
         }
         .aurora-blob-2 {
             width: 500px; height: 500px; top: 30%; right: -10%;
-            background: radial-gradient(circle, var(--purple), transparent 70%);
+            background: radial-gradient(circle, rgba(167,139,250,0.12), transparent 70%);
             animation: auroraMove2 25s ease-in-out infinite;
         }
         .aurora-blob-3 {
             width: 550px; height: 550px; bottom: -10%; left: 20%;
-            background: radial-gradient(circle, var(--pink), transparent 70%);
+            background: radial-gradient(circle, rgba(244,114,182,0.1), transparent 70%);
             animation: auroraMove3 22s ease-in-out infinite;
         }
         .aurora-blob-4 {
             width: 450px; height: 450px; top: 60%; right: 30%;
-            background: radial-gradient(circle, var(--green), transparent 70%);
+            background: radial-gradient(circle, rgba(52,211,153,0.1), transparent 70%);
             animation: auroraMove4 18s ease-in-out infinite;
         }
         @keyframes auroraMove1 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
-            25% { transform: translate(100px, 80px) scale(1.2); opacity: 1; }
-            50% { transform: translate(50px, 150px) scale(0.9); opacity: 0.6; }
-            75% { transform: translate(-50px, 60px) scale(1.1); opacity: 0.9; }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, 80px) scale(1.2); }
+            50% { transform: translate(50px, 150px) scale(0.9); }
+            75% { transform: translate(-50px, 60px) scale(1.1); }
         }
         @keyframes auroraMove2 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
-            33% { transform: translate(-80px, 100px) scale(1.15); opacity: 1; }
-            66% { transform: translate(-120px, -50px) scale(0.85); opacity: 0.5; }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-80px, 100px) scale(1.15); }
+            66% { transform: translate(-120px, -50px) scale(0.85); }
         }
         @keyframes auroraMove3 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
-            30% { transform: translate(80px, -80px) scale(1.1); opacity: 0.9; }
-            60% { transform: translate(-60px, -120px) scale(0.95); opacity: 0.7; }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            30% { transform: translate(80px, -80px) scale(1.1); }
+            60% { transform: translate(-60px, -120px) scale(0.95); }
         }
         @keyframes auroraMove4 {
-            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-            40% { transform: translate(-100px, -60px) scale(1.2); opacity: 0.8; }
-            70% { transform: translate(60px, 80px) scale(0.9); opacity: 0.6; }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            40% { transform: translate(-100px, -60px) scale(1.2); }
+            70% { transform: translate(60px, 80px) scale(0.9); }
         }
 
         /* ===== MOUSE GLOW ===== */
         .mouse-glow {
-            position: fixed; width: 500px; height: 500px;
+            position: fixed; width: 400px; height: 400px;
             border-radius: 50%; pointer-events: none; z-index: 1;
-            background: radial-gradient(circle, rgba(96,165,250,0.12) 0%, rgba(167,139,250,0.06) 30%, transparent 70%);
-            opacity: var(--glow-opacity); transform: translate(-250px, -250px);
-            transition: opacity 0.5s ease; will-change: transform;
+            background: radial-gradient(circle, rgba(96,165,250,0.08) 0%, rgba(167,139,250,0.04) 30%, transparent 70%);
+            opacity: var(--glow-opacity); transform: translate(-200px, -200px);
+            transition: opacity 0.5s ease, transform 0.3s ease; will-change: transform;
         }
 
         /* ===== GRAIN OVERLAY ===== */
@@ -163,7 +163,7 @@
             width: 200%; height: 200%;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
             background-size: 256px 256px;
-            animation: grainDrift 0.5s steps(1) infinite;
+            animation: grainDrift 4s steps(4) infinite;
         }
         @keyframes grainDrift {
             0% { transform: translate(0, 0); }
@@ -338,12 +338,12 @@
         }
         #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .hero-blob {
-            position: absolute; border-radius: 50%; filter: blur(100px);
+            position: absolute; border-radius: 50%;
             animation: blobFloat 10s ease-in-out infinite; z-index: 1;
         }
-        .hero-blob-1 { width: 500px; height: 500px; background: rgba(96,165,250,0.25); top: -10%; right: -5%; }
-        .hero-blob-2 { width: 400px; height: 400px; background: rgba(167,139,250,0.2); bottom: -10%; left: -5%; animation-delay: 3s; }
-        .hero-blob-3 { width: 300px; height: 300px; background: rgba(244,114,182,0.15); top: 40%; left: 30%; animation-delay: 6s; }
+        .hero-blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(96,165,250,0.18), transparent 70%); top: -10%; right: -5%; }
+        .hero-blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(167,139,250,0.14), transparent 70%); bottom: -10%; left: -5%; animation-delay: 3s; }
+        .hero-blob-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(244,114,182,0.1), transparent 70%); top: 40%; left: 30%; animation-delay: 6s; }
         @keyframes blobFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -40px) scale(1.05); }
@@ -373,12 +373,13 @@
         .hero-photo-wrapper:hover { animation-play-state: paused; }
         .hero-photo-ring {
             position: relative; width: 320px; height: 320px;
-            filter: drop-shadow(0 0 30px rgba(99,102,241,0.3)) drop-shadow(0 0 60px rgba(168,85,247,0.15));
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(99,102,241,0.3), 0 0 60px rgba(168,85,247,0.15);
             animation: glowPulse 4s ease-in-out infinite;
         }
         @keyframes glowPulse {
-            0%, 100% { filter: drop-shadow(0 0 30px rgba(99,102,241,0.3)) drop-shadow(0 0 60px rgba(168,85,247,0.15)); }
-            50% { filter: drop-shadow(0 0 45px rgba(99,102,241,0.5)) drop-shadow(0 0 80px rgba(168,85,247,0.25)); }
+            0%, 100% { box-shadow: 0 0 30px rgba(99,102,241,0.3), 0 0 60px rgba(168,85,247,0.15); }
+            50% { box-shadow: 0 0 45px rgba(99,102,241,0.5), 0 0 80px rgba(168,85,247,0.25); }
         }
         .hero-photo-ring::before {
             content: ''; position: absolute; inset: -6px; border-radius: 50%;
@@ -492,7 +493,7 @@
         .stat-card {
             background: var(--bg-card); border: 1px solid var(--border-card);
             border-radius: 20px; padding: 40px 20px; text-align: center;
-            backdrop-filter: blur(12px); transition: all 0.4s ease; position: relative; overflow: hidden;
+            transition: all 0.4s ease; position: relative; overflow: hidden;
         }
         .stat-card::after {
             content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
@@ -531,7 +532,7 @@
         .highlight-card {
             background: var(--bg-card); border: 1px solid var(--border-card);
             border-radius: 20px; padding: 28px 24px; text-align: center;
-            backdrop-filter: blur(12px); transition: all 0.4s ease; position: relative; overflow: hidden;
+            transition: all 0.4s ease; position: relative; overflow: hidden;
         }
         .highlight-card::after {
             content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
@@ -582,7 +583,7 @@
             background: var(--bg-card); border: 1px solid var(--border-card);
             border-radius: 20px; padding: 36px 28px; text-align: center;
             transition: border-color 0.4s, box-shadow 0.4s; position: relative; overflow: hidden;
-            transform-style: preserve-3d; backdrop-filter: blur(12px);
+            transform-style: preserve-3d;
         }
         .skill-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -641,7 +642,7 @@
         .timeline-item {
             position: relative; margin-bottom: 48px; padding: 32px;
             background: var(--bg-card); border: 1px solid var(--border-card);
-            border-radius: 20px; backdrop-filter: blur(12px); transition: all 0.4s ease;
+            border-radius: 20px; transition: all 0.4s ease;
             overflow: hidden;
         }
         .timeline-item::before {
@@ -684,7 +685,7 @@
         }
         .testimonial-card {
             background: var(--bg-card); border: 1px solid var(--border-card);
-            border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px);
+            border-radius: 20px; overflow: hidden;
             transition: all 0.4s ease; position: relative;
             break-inside: avoid; margin-bottom: 24px;
         }
@@ -1202,22 +1203,20 @@
         var cursorDot = document.getElementById('cursorDot');
         var cursorRing = document.getElementById('cursorRing');
         var mouseGlow = document.getElementById('mouseGlow');
-        var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, glowX = 0, glowY = 0;
+        var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
         var isTouchDevice = window.matchMedia('(hover: none)').matches;
 
         if (!isTouchDevice) {
             document.addEventListener('mousemove', function(e) {
                 mouseX = e.clientX; mouseY = e.clientY;
                 cursorDot.style.transform = 'translate(' + (mouseX - 4) + 'px,' + (mouseY - 4) + 'px)';
+                mouseGlow.style.transform = 'translate(' + (mouseX - 200) + 'px,' + (mouseY - 200) + 'px)';
             });
 
             function animateCursor() {
-                ringX += (mouseX - ringX) * 0.12;
-                ringY += (mouseY - ringY) * 0.12;
+                ringX += (mouseX - ringX) * 0.15;
+                ringY += (mouseY - ringY) * 0.15;
                 cursorRing.style.transform = 'translate(' + (ringX - 18) + 'px,' + (ringY - 18) + 'px)';
-                glowX += (mouseX - glowX) * 0.06;
-                glowY += (mouseY - glowY) * 0.06;
-                mouseGlow.style.transform = 'translate(' + (glowX - 250) + 'px,' + (glowY - 250) + 'px)';
                 requestAnimationFrame(animateCursor);
             }
             animateCursor();
@@ -1243,7 +1242,7 @@
         var particles = [];
         var heroMouseX = 0, heroMouseY = 0;
         var colors = ['#60A5FA','#A78BFA','#F472B6','#34D399','#FBBF24'];
-        var particleCount = isTouchDevice ? 30 : 70;
+        var particleCount = isTouchDevice ? 20 : 40;
 
         function resizeCanvas() {
             canvas.width = heroSection.offsetWidth;
@@ -1252,11 +1251,7 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        heroSection.addEventListener('mousemove', function(e) {
-            var rect = heroSection.getBoundingClientRect();
-            heroMouseX = e.clientX - rect.left;
-            heroMouseY = e.clientY - rect.top;
-        });
+        /* hero mousemove removed for performance — particles move freely */
 
         function Particle() {
             this.x = Math.random() * canvas.width;
@@ -1269,17 +1264,18 @@
 
         for (var i = 0; i < particleCount; i++) particles.push(new Particle());
 
+        var pOpacity = 0.6;
+        var heroVisible = true;
+        var particleObserver = new IntersectionObserver(function(entries) {
+            heroVisible = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        particleObserver.observe(heroSection);
+
         function animateParticles() {
+            if (!heroVisible) { requestAnimationFrame(animateParticles); return; }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            var pOpacity = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--particle-opacity')) || 0.6;
             for (var i = 0; i < particles.length; i++) {
                 var p = particles[i];
-                var dx = p.x - heroMouseX, dy = p.y - heroMouseY;
-                var dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 150 && dist > 0) {
-                    p.vx += dx / dist * 0.3;
-                    p.vy += dy / dist * 0.3;
-                }
                 p.vx *= 0.98; p.vy *= 0.98;
                 p.x += p.vx; p.y += p.vy;
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
@@ -1288,10 +1284,11 @@
                 ctx.fillStyle = p.color; ctx.globalAlpha = pOpacity; ctx.fill();
                 for (var j = i + 1; j < particles.length; j++) {
                     var p2 = particles[j];
-                    var d = Math.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2);
-                    if (d < 120) {
+                    var dx = p.x - p2.x, dy = p.y - p2.y;
+                    var d2 = dx * dx + dy * dy;
+                    if (d2 < 14400) {
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = 'rgba(96,165,250,' + (1 - d / 120) * 0.25 + ')';
+                        ctx.strokeStyle = 'rgba(96,165,250,' + (1 - Math.sqrt(d2) / 120) * 0.25 + ')';
                         ctx.globalAlpha = 1; ctx.lineWidth = 0.5; ctx.stroke();
                     }
                 }
