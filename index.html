@@ -96,7 +96,9 @@
             position: fixed; inset: 0; z-index: 0; pointer-events: none;
             overflow: hidden; opacity: var(--aurora-opacity);
             transition: opacity 0.5s ease;
+            animation: auroraHue 30s ease-in-out infinite alternate;
         }
+        @keyframes auroraHue { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(40deg); } }
         .aurora-blob {
             position: absolute; border-radius: 50%;
             will-change: transform;
@@ -1526,6 +1528,9 @@
         var backToTop = document.getElementById('backToTop');
         var sections = document.querySelectorAll('section[id]');
         var navLinksAll = document.querySelectorAll('.nav-links a');
+        var parallaxShapes = document.querySelectorAll('.floating-shapes');
+        var speeds = [0.03, -0.02, 0.04, -0.03, 0.02, -0.04, 0.03, -0.02];
+        parallaxShapes.forEach(function(el, i) { el.dataset.speed = speeds[i % speeds.length]; });
         var ticking = false;
 
         window.addEventListener('scroll', function() {
@@ -1550,6 +1555,13 @@
                         if (blob1) blob1.style.transform = 'translateY(' + (scrollY * 0.25) + 'px)';
                         if (blob2) blob2.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
                         if (blob3) blob3.style.transform = 'translateY(' + (scrollY * 0.1) + 'px)';
+                        parallaxShapes.forEach(function(container) {
+                            var rect = container.parentElement.getBoundingClientRect();
+                            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                                var offset = rect.top * container.dataset.speed;
+                                container.style.transform = 'translateY(' + offset + 'px)';
+                            }
+                        });
                     }
                     ticking = false;
                 });
@@ -1616,9 +1628,9 @@
         }, { threshold: 0.3 });
         statsObserver.observe(document.getElementById('stats'));
 
-        // ============ 3D TILT ON SKILL CARDS ============
+        // ============ 3D TILT ON CARDS ============
         if (!isTouchDevice) {
-            document.querySelectorAll('.skill-card').forEach(function(card) {
+            document.querySelectorAll('.skill-card, .testimonial-card, .timeline-item, .stat-card, .highlight-card').forEach(function(card) {
                 card.addEventListener('mousemove', function(e) {
                     var rect = card.getBoundingClientRect();
                     var x = e.clientX - rect.left;
